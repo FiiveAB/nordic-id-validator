@@ -19,6 +19,20 @@ function testDate(number) {
     return dateIsValid
 }
 
+function testNorwegianDate(number) {
+    let datePart = ""
+    if (number.length === 11) {
+        datePart = number.slice(0, 6)
+    } else {
+        return false
+    }
+
+    const dateFormat = 'DDMMYY'
+    const dateIsValid = dayjs(datePart, dateFormat).isValid
+
+    return dateIsValid
+}
+
 
 /**
  * Helper function to validate the Luhn algorithm.
@@ -47,5 +61,6 @@ function teshLuhn(number) {
 
 export {
     testDate,
+    testNorwegianDate,
     teshLuhn
 }
