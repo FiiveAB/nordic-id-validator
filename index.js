@@ -26,7 +26,7 @@ class Validator {
             case 'FI':
                 return this.isValidFI(input)
             default:
-                throw new Error('Invalid country code')
+                throw new Error('Invalid country code. Valid country codes are: SE, NO, DK, FI')
         }
     }
 
