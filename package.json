@@ -1,0 +1,40 @@
+{
+  "name": "nordic-id-validator",
+  "version": "1.0.0",
+  "description": "A light-weight library for verifying Nordic personal identification numbers with accuracy and ease.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Klarity-Software/nordic-id-validator.git"
+  },
+  "keywords": [
+    "nordic",
+    "id",
+    "scandinavian",
+    "personal",
+    "identification",
+    "numbers",
+    "personal",
+    "number",
+    "sweden",
+    "norway",
+    "denmark",
+    "finland"
+  ],
+  "author": "Lucas Rosvall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Klarity-Software/nordic-id-validator/issues"
+  },
+  "homepage": "https://github.com/Klarity-Software/nordic-id-validator#readme",
+  "devDependencies": {
+    "ava": "^5.3.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10"
+  }
+}
