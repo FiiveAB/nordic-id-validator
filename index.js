@@ -49,7 +49,7 @@ function teshLuhn(number) {
  * Helper function to validate a Swedish personal number.
  * @param {string} number - The personal number to validate.
  */
-function checkSversonalNumber(number) {
+function svPersonalNumber(number) {
     return (
         // Length must be 10 or 12 digits
         (number.length === 10 || number.length === 12) &&
@@ -60,6 +60,40 @@ function checkSversonalNumber(number) {
     )
 }
 
+function noPersonalNumber(number) {
+    return (
+        // Length must be 11 digits
+        number.length === 11 &&
+        // Validate the date of birth
+        testDate(number) &&
+        // Validate the check digit (Luhn algorithm)
+        teshLuhn(number)
+    )
+}
+
+function dkPersonalNumber(number) {
+    return (
+        // Length must be 10 digits
+        number.length === 10 &&
+        // Validate the date of birth
+        testDate(number)
+        // Validate the check digit (Luhn algorithm)
+        //teshLuhn(number)
+    )
+}
+
+function fiPersonalNumber(number) {
+    return (
+        // Length must be 10 digits
+        number.length === 10 &&
+        // Validate the date of birth
+        testDate(number) &&
+        // Validate the check digit (Luhn algorithm)
+        teshLuhn(number)
+    )
+}
+
+
 /**
  * Class for validating Swedish personal numbers and company registration numbers.
  * @class Validator
@@ -68,8 +102,8 @@ class Validator {
  
     /**
      * Returns whether the input is a valid personal ID or not.
-     * @param {string|number} input 
-     * @param {string} countryCode 
+     * @param {string|number} input - The personal number to validate.
+     * @param {string} countryCode - The country code to validate against.
      * @returns {boolean|Error}
      */
     isValid(input, countryCode) {
@@ -97,26 +131,53 @@ class Validator {
     isValidSE(input) {
         if (typeof input === 'string') {
             const normalized = input.replace(/\D/g, '')
-            return checkSversonalNumber(normalized)
+            return svPersonalNumber(normalized)
 
         } else if (typeof input === 'number') {
             const normalized = '' + input
-            return checkSversonalNumber(normalized)
+            return svPersonalNumber(normalized)
         } else {
             throw new TypeError(`Expected a string or number, got ${typeof input}`)
         }
     }
 
     isValidNO(input) {
-       
+        if (typeof input === 'string') {
+            const normalized = input.replace(/\D/g, '')
+            return noPersonalNumber(normalized)
+            
+        } else if (typeof input === 'number') {
+            const normalized = '' + input
+            return noPersonalNumber(normalized)
+        } else {
+            throw new TypeError(`Expected a string or number, got ${typeof input}`)
+        }
     }
 
     isValidDK(input) {
-       
+        if (typeof input === 'string') {
+            const normalized = input.replace(/\D/g, '')
+            return dkPersonalNumber(normalized)
+
+        } else if (typeof input === 'number') {
+            const normalized = '' + input
+            return dkPersonalNumber(normalized)
+        } else {
+            throw new TypeError(`Expected a string or number, got ${typeof input}`)
+        }
     }
 
     isValidFI(input) {
-       
+        if (typeof input === 'string') {
+            const normalized = input.replace(/\D/g, '')
+            return fiPersonalNumber(normalized)
+
+        } else if (typeof input === 'number') {
+            const normalized = '' + input
+            return fiPersonalNumber(normalized)
+        } else {
+            throw new TypeError(`Expected a string or number, got ${typeof input}`)
+        }
     }
 }
 
