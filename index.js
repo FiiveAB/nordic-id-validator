@@ -1,11 +1,6 @@
 const dayjs = require("dayjs")
 
 /**
- * This file contains the Validator class, which is used to validate Nordic personal numbers.
- */
-
-
-/**
  * Helper function to validate the date part of a Swedish personal number.
  * @param {string} number 
  * @returns 
@@ -54,7 +49,7 @@ function teshLuhn(number) {
  * Helper function to validate a Swedish personal number.
  * @param {string} number - The personal number to validate.
  */
-function checkPersonalNumber(number) {
+function checkSversonalNumber(number) {
     return (
         // Length must be 10 or 12 digits
         (number.length === 10 || number.length === 12) &&
@@ -71,6 +66,26 @@ function checkPersonalNumber(number) {
  */
 class Validator {
  
+    /**
+     * Returns whether the input is a valid personal ID or not.
+     * @param {string|number} input 
+     * @param {string} countryCode 
+     * @returns {boolean|Error}
+     */
+    isValid(input, countryCode) {
+        switch(countryCode) {
+            case 'SE':
+                return this.isValidSE(input)
+            case 'NO':
+                return this.isValidNO(input)
+            case 'DK':
+                return this.isValidDK(input)
+            case 'FI':
+                return this.isValidFI(input)
+            default:
+                throw new Error('Invalid country code')
+        }
+    }
 
     /**
      * Validates a Swedish personal number.
@@ -79,17 +94,29 @@ class Validator {
      * @return {boolean} - Whether the personal number is valid.
      * 
      */
-    validatePersonalNumber(input) {
+    isValidSE(input) {
         if (typeof input === 'string') {
             const normalized = input.replace(/\D/g, '')
-            return checkPersonalNumber(normalized)
+            return checkSversonalNumber(normalized)
 
         } else if (typeof input === 'number') {
             const normalized = '' + input
-            return checkPersonalNumber(normalized)
+            return checkSversonalNumber(normalized)
         } else {
             throw new TypeError(`Expected a string or number, got ${typeof input}`)
         }
+    }
+
+    isValidNO(input) {
+       
+    }
+
+    isValidDK(input) {
+       
+    }
+
+    isValidFI(input) {
+       
     }
 }
 
