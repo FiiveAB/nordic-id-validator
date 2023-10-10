@@ -1,4 +1,4 @@
-import { testDate, teshLuhn } from "./general";
+import { testSwedishDate, teshLuhn } from "./general";
 
 /**
  * Helper function to validate a Swedish personal number.
@@ -9,7 +9,7 @@ export default function svPersonalNumber(number) {
         // Length must be 10 or 12 digits
         (number.length === 10 || number.length === 12) &&
         // Validate the date of birth
-        testDate(number) &&
+        testSwedishDate(number) &&
         // Validate the check digit (Luhn algorithm)
         teshLuhn(number)
     )

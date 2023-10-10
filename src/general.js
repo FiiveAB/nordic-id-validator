@@ -5,7 +5,7 @@ const dayjs = require("dayjs")
  * @param {string} number 
  * @returns 
  */
-function testDate(number) {
+function testSwedishDate(number) {
     let datePart = ""
     if (number.length === 10) {
         datePart = number.slice(0, 6)
@@ -22,6 +22,34 @@ function testDate(number) {
 function testNorwegianDate(number) {
     let datePart = ""
     if (number.length === 11) {
+        datePart = number.slice(0, 6)
+    } else {
+        return false
+    }
+
+    const dateFormat = 'DDMMYY'
+    const dateIsValid = dayjs(datePart, dateFormat).isValid
+
+    return dateIsValid
+}
+
+function testDanishDate(number) {
+    let datePart = ""
+    if (number.length === 11) {
+        datePart = number.slice(0, 6)
+    } else {
+        return false
+    }
+
+    const dateFormat = 'DDMMYY'
+    const dateIsValid = dayjs(datePart, dateFormat).isValid
+
+    return dateIsValid
+}
+
+function testFinnishDate(number) {
+    let datePart = ""
+    if (number.length === 10) {
         datePart = number.slice(0, 6)
     } else {
         return false
@@ -60,7 +88,9 @@ function teshLuhn(number) {
 }
 
 export {
-    testDate,
+    testSwedishDate,
     testNorwegianDate,
+    testDanishDate,
+    testFinnishDate,
     teshLuhn
 }

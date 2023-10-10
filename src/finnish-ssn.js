@@ -1,4 +1,4 @@
-import { testDate } from "./general";
+import { testFinnishDate } from "./general";
 
 const checksumTable = '0123456789ABCDEFHJKLMNPRSTUVWXY'.split('')
 const SSN_REGEX = /^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])([5-9]\d\+|\d\d[-|U-Y]|[012]\d[A-F])\d{3}[\dA-Z]$/
@@ -13,11 +13,9 @@ export default function fiPersonalNumber(number) {
     const checksumBase = parseInt(ssn.substring(0, 6) + rollingId, 10)
 
     return (
-        // Length must be 10 digits
+        // Validate the check digit
         checksum === checksumTable[checksumBase % 31] &&
         // Validate the date of birth
-        testDate(number) &&
-        // Validate the check digit (Luhn algorithm)
-        checksum === checksumTable[checksumBase % 31]
+        testFinnishDate(number)
     )
 }
