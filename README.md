@@ -58,6 +58,22 @@ console.log(isValidNorwegian); // true or false based on the validity
 
 ```
 
+
+You can also validate a personal number without specifying the country code. In this case, the country is specified by the the function. For example:
+
+```jsx
+const isValidSwedish = validator.isValidSE('123456-7890');
+console.log(isValidSwedish); // true or false based on the validity
+```
+
+The following country-specific methods are available:
+
+- **`isValidSE`** for Swedish SSN
+- **`isValidNO`** for Norwegian SSN
+- **`isValidDK`** for Danish SSN
+- **`isValidFI`** for Finnish SSN
+
+
 ## Error Handling
 
 The **`isValid`** method will throw an error if an invalid country code is provided or if the input is neither a string nor a number:
