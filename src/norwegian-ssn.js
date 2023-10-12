@@ -1,4 +1,4 @@
-import { testNorwegianDate } from "./general";
+const { testNorwegianDate } = require("./general");
 
 function isValidCheckDigit(staticSequence, elevenDigits) {
     const productSum = staticSequence.reduce(
@@ -21,7 +21,7 @@ function isValidCheckDigits(elevenDigits) {
     );
 }
 
-export default function noPersonalNumber(number) {
+function noPersonalNumber(number) {
     return (
         // Length must be 11 digits
         number.length === 11 &&
@@ -31,3 +31,5 @@ export default function noPersonalNumber(number) {
         isValidCheckDigits(number)
     )
 }
+
+module.exports = noPersonalNumber;

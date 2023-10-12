@@ -1,4 +1,6 @@
 const dayjs = require("dayjs")
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat)
 
 /**
  * Helper function to validate the date part of a Swedish personal number.
@@ -14,7 +16,7 @@ function testSwedishDate(number) {
     }
 
     const dateFormat = datePart.length === 6 ? 'YYMMDD' : 'YYYYMMDD';
-    const dateIsValid = dayjs(datePart, dateFormat).isValid
+    const dateIsValid = dayjs(datePart, dateFormat, true).isValid()
 
     return dateIsValid
 }
@@ -28,26 +30,12 @@ function testNorwegianDate(number) {
     }
 
     const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat).isValid
+    const dateIsValid = dayjs(datePart, dateFormat,true).isValid()
 
     return dateIsValid
 }
 
 function testDanishDate(number) {
-    let datePart = ""
-    if (number.length === 11) {
-        datePart = number.slice(0, 6)
-    } else {
-        return false
-    }
-
-    const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat).isValid
-
-    return dateIsValid
-}
-
-function testFinnishDate(number) {
     let datePart = ""
     if (number.length === 10) {
         datePart = number.slice(0, 6)
@@ -56,7 +44,21 @@ function testFinnishDate(number) {
     }
 
     const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat).isValid
+    const dateIsValid = dayjs(datePart, dateFormat, true).isValid()
+
+    return dateIsValid
+}
+
+function testFinnishDate(number) {
+    let datePart = ""
+    if (number.length === 11) {
+        datePart = number.slice(0, 6)
+    } else {
+        return false
+    }    
+
+    const dateFormat = 'DDMMYY'
+    const dateIsValid = dayjs(datePart, dateFormat,true).isValid()
 
     return dateIsValid
 }
@@ -87,7 +89,7 @@ function teshLuhn(number) {
     return result % 10 === 0;
 }
 
-export {
+module.exports = {
     testSwedishDate,
     testNorwegianDate,
     testDanishDate,

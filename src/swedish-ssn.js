@@ -1,10 +1,10 @@
-import { testSwedishDate, teshLuhn } from "./general";
+const { testSwedishDate, teshLuhn } = require("./general");
 
 /**
  * Helper function to validate a Swedish personal number.
  * @param {string} number - The personal number to validate.
  */
-export default function svPersonalNumber(number) {
+function svPersonalNumber(number) {
     return (
         // Length must be 10 or 12 digits
         (number.length === 10 || number.length === 12) &&
@@ -14,3 +14,5 @@ export default function svPersonalNumber(number) {
         teshLuhn(number)
     )
 }
+
+module.exports = svPersonalNumber;

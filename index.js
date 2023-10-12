@@ -1,7 +1,7 @@
-import svPersonalNumber from "./src/swedish-ssn"
-import dkPersonalNumber from "./src/dannish-ssn"
-import noPersonalNumber from "./src/norwegian-ssn"
-import fiPersonalNumber from "./src/finnish-ssn"
+const svPersonalNumber = require("./src/swedish-ssn");
+const dkPersonalNumber = require("./src/dannish-ssn");
+const noPersonalNumber = require("./src/norwegian-ssn");
+const fiPersonalNumber = require("./src/finnish-ssn");
 
 /**
  * Class for validating Swedish personal numbers and company registration numbers.
@@ -93,7 +93,7 @@ class Validator {
     */
     isValidFI(input) {
         if (typeof input === 'string') {
-            const normalized = input.replace(/\D/g, '')
+            const normalized = input.trim()
             return fiPersonalNumber(normalized)
 
         } else if (typeof input === 'number') {

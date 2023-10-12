@@ -1,6 +1,6 @@
-import { testDanishDate } from "./general";
+const { testDanishDate } = require("./general");
 
-export default function dkPersonalNumber(number) {
+function dkPersonalNumber(number) {
     return (
         // Length must be 10 digits
         number.length === 10 &&
@@ -10,3 +10,5 @@ export default function dkPersonalNumber(number) {
         //teshLuhn(number)
     )
 }
+
+module.exports = dkPersonalNumber;
