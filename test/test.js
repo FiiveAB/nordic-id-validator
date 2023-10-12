@@ -1,5 +1,5 @@
 const test = require('ava');
-const Validator = require('../index');
+const Validator = require('../src/index');
 
 const validator = new Validator();
 

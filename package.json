@@ -2,10 +2,11 @@
   "name": "nordic-id-validator",
   "version": "1.0.2",
   "description": "A light-weight library for verifying Nordic personal identification numbers with accuracy and ease.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "babel src --out-dir dist",
     "test": "ava",
-    "start": "node index.js"
+    "start": "node .src/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,9 @@
   },
   "homepage": "https://github.com/Klarity-Software/nordic-id-validator#readme",
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
     "ava": "^5.3.1"
   },
   "dependencies": {

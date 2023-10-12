@@ -1,7 +1,7 @@
-const svPersonalNumber = require("./src/swedish-ssn");
-const dkPersonalNumber = require("./src/dannish-ssn");
-const noPersonalNumber = require("./src/norwegian-ssn");
-const fiPersonalNumber = require("./src/finnish-ssn");
+const svPersonalNumber = require("./swedish-ssn");
+const dkPersonalNumber = require("./dannish-ssn");
+const noPersonalNumber = require("./norwegian-ssn");
+const fiPersonalNumber = require("./finnish-ssn");
 
 /**
  * Class for validating Swedish personal numbers and company registration numbers.
