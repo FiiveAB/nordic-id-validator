@@ -1,6 +1,6 @@
 {
   "name": "nordic-id-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A light-weight library for verifying Nordic personal identification numbers with accuracy and ease.",
   "main": "dist/index.js",
   "scripts": {
