@@ -1,7 +1,7 @@
 {
   "name": "nordic-id-validator",
-  "version": "1.0.4",
-  "description": "A light-weight library for verifying Nordic personal identification numbers with accuracy and ease.",
+  "version": "1.0.5",
+  "description": "A light-weight library for verifying Nordic personal identification numbers (SNNs) with accuracy and ease.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
