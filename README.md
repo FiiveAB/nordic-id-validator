@@ -96,4 +96,4 @@ We welcome contributions! If you find a bug or have suggestions, please open an 
 MIT
 
 
-A project by [Klarity](https://www.klarity.se).
+A project by [Fiive](https://www.fiive.se).
