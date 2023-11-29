@@ -1,6 +1,40 @@
-const dayjs = require("dayjs")
-const customParseFormat = require('dayjs/plugin/customParseFormat')
-dayjs.extend(customParseFormat)
+
+/**
+ * Helper function to validate a date string.
+ * @param {string} dateString - The date string to validate.
+ * @param {string} format - The expected format of the date string.
+ * @returns {boolean} - True if the date is valid, false otherwise.
+ */
+function isValidDate(dateString, format) {
+    if (!/^\d+$/.test(dateString)) {
+        return false;
+    }
+
+    if (dateString.length !== format.length) {
+        return false;
+    }
+
+    try {
+        const yearIndex = format.indexOf('YYYY') >= 0 ? format.indexOf('YYYY') : format.indexOf('YY');
+        const yearLength = format.indexOf('YYYY') >= 0 ? 4 : 2;
+        const monthIndex = format.indexOf('MM');
+        const dayIndex = format.indexOf('DD');
+    
+        const year = yearLength === 4 ? parseInt(dateString.substring(yearIndex, yearIndex + 4), 10) :
+                     yearLength === 2 ? parseInt(dateString.substring(yearIndex, yearIndex + 2), 10) + 2000 : null;
+        const month = parseInt(dateString.substring(monthIndex, monthIndex + 2), 10) - 1; // month is 0-indexed
+        const day = parseInt(dateString.substring(dayIndex, dayIndex + 2), 10);
+    
+        if (year === null || isNaN(month) || isNaN(day)) return false;
+    
+        const date = new Date(year, month, day);
+        return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
+    }  
+    catch (error) {
+        return false;
+    }
+}
+
 
 /**
  * Helper function to validate the date part of a Swedish personal number.
@@ -16,9 +50,7 @@ function testSwedishDate(number) {
     }
 
     const dateFormat = datePart.length === 6 ? 'YYMMDD' : 'YYYYMMDD';
-    const dateIsValid = dayjs(datePart, dateFormat, true).isValid()
-
-    return dateIsValid
+    return isValidDate(datePart, dateFormat);
 }
 
 function testNorwegianDate(number) {
@@ -30,9 +62,7 @@ function testNorwegianDate(number) {
     }
 
     const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat,true).isValid()
-
-    return dateIsValid
+    return isValidDate(datePart, dateFormat)
 }
 
 function testDanishDate(number) {
@@ -44,9 +74,7 @@ function testDanishDate(number) {
     }
 
     const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat, true).isValid()
-
-    return dateIsValid
+    return isValidDate(datePart, dateFormat)
 }
 
 function testFinnishDate(number) {
@@ -58,9 +86,7 @@ function testFinnishDate(number) {
     }    
 
     const dateFormat = 'DDMMYY'
-    const dateIsValid = dayjs(datePart, dateFormat,true).isValid()
-
-    return dateIsValid
+    return isValidDate(datePart, dateFormat)
 }
 
 
@@ -94,5 +120,6 @@ module.exports = {
     testNorwegianDate,
     testDanishDate,
     testFinnishDate,
-    teshLuhn
+    teshLuhn,
+    isValidDate
 }
