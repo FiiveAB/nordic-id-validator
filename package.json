@@ -6,7 +6,9 @@
   "scripts": {
     "build": "babel src --out-dir dist",
     "test": "ava",
-    "start": "node .src/index.js"
+    "start": "node .src/index.js",
+    "lint": "eslint src",
+    "publish": "npm run lint && npm run test && npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -36,7 +38,8 @@
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
-    "ava": "^5.3.1"
+    "ava": "^5.3.1",
+    "eslint": "^8.54.0"
   },
   "dependencies": {
     "dayjs": "^1.11.10"
