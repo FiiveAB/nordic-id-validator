@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Klarity-Software/nordic-id-validator.git"
+    "url": "https://github.com/FiiveAB/nordic-id-validator.git"
   },
   "keywords": [
     "nordic",
@@ -31,18 +31,15 @@
   "author": "Lucas Rosvall",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Klarity-Software/nordic-id-validator/issues"
+    "url": "https://github.com/FiiveAB/nordic-id-validator/issues"
   },
-  "homepage": "https://github.com/Klarity-Software/nordic-id-validator#readme",
+  "homepage": "https://github.com/FiiveAB/nordic-id-validator#readme",
   "devDependencies": {
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
     "ava": "^5.3.1",
     "eslint": "^8.54.0"
-  },
-  "dependencies": {
-    "dayjs": "^1.11.10"
   },
   "engines": {
     "node": ">=12.0.0"
