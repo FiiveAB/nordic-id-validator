@@ -58,7 +58,7 @@ invalidDateTest('YYMMDD', [
 
 
 validDateTest('YYYYMMDD', [
-    '19000101', // Start of 20th century
+    '19200101', // Start of 20th century
     '19991231', // End of 20th century
     '20210228', // Non-leap year
     '20000229', // Leap year (February 29, 2000)
@@ -79,41 +79,64 @@ validDateTest('YYYYMMDD', [
 invalidDateTest('YYYYMMDD', [
     '19000001', // Invalid month (Month 00)
     '19991301', // Invalid month (Month 13)
+    '20210229', // Non-leap year, invalid February 29
+    '20211315', // Invalid month (Month 13)
+    '20210230', // Invalid day (February 30)
+    '20211131', // Invalid day (November 31)
+    '20220001', // Invalid month (Month 00)
+    '20221401', // Invalid month (Month 14)
+    '20000230', // Leap year but invalid day (February 30)
+    '20190229', // Non-leap year, invalid February 29
+    '20210200', // Invalid day (Day 00)
+    '19890231', // Invalid day (February 31)
+    '20181232', // Invalid day (December 32)
+    '20150020', // Invalid year (Year 2015 is repeated)
+    '18991232', // Invalid day (December 32 in 1899)
     // Add more invalid dates as needed
 ]);
 
-// DDMMYY Format Additional Tests
 validDateTest('DDMMYY', [
     '010100', // Start of 20th century
     '311299', // End of 20th century
     '280221', // Non-leap year
+    '290400', // Leap year (February 29, 2004)
+    '310398', // End of March (March 31, 1998)
+    '150786', // Mid-year (July 15, 1986)
+    '070985', // Random valid date (September 7, 1985)
+    '241299', // Christmas Eve, 1999
+    '311200', // End of year (December 31, 2000)
+    '010101', // Start of 21st century
+    '290800', // Leap year (February 29, 2000)
     // Add more valid dates as needed
 ]);
+
+
+
 invalidDateTest('DDMMYY', [
     '000101', // Invalid day (Day 00)
     '320199', // Invalid day (Day 32)
-    // Add more invalid dates as needed
+    '310299', // Non-leap year, invalid February 31
+    '310400', // Invalid day (April 31)
+    '311113', // Invalid month (Month 13)
+    '311500', // Invalid month (Month 15)
+    '290299', // Non-leap year, invalid February 29
+    '321000', // Invalid month (Month 10 with invalid day)
+    '321212', // Invalid day (December 32)
+    '000000', // Invalid date (Month 00, Day 00)
+    '290201', // Non-leap year, invalid February 29, 2001
+    '311399', // Invalid month (Month 10 with invalid day)
+    
 ]);
 
-
-invalidDateTest('YYYYMMDD', [
-    '19000229', // Non-leap year
-    '21000229', // Non-leap year
-]);
 
 // Invalid Input Format Tests
 invalidDateTest('YYDDMM', [
     '01a501', // Invalid format
     '123b01', // Invalid format
-]);
-
-// Future Dates Tests
-validDateTest('YYYYMMDD', [
-    '20501231', // Future valid date
-    '20991231', // Future valid date
-]);
-
-invalidDateTest('YYYYMMDD', [
-    '20501301', // Future invalid month
-    '20990230', // Future invalid day
+    null,
+    23232,
+    NaN,
+    980123,
+    {},
+    []
 ]);

@@ -15,13 +15,20 @@ function isValidDate(dateString, format) {
     }
 
     try {
+        const currentYear = new Date().getFullYear();
         const yearIndex = format.indexOf('YYYY') >= 0 ? format.indexOf('YYYY') : format.indexOf('YY');
         const yearLength = format.indexOf('YYYY') >= 0 ? 4 : 2;
         const monthIndex = format.indexOf('MM');
         const dayIndex = format.indexOf('DD');
     
-        const year = yearLength === 4 ? parseInt(dateString.substring(yearIndex, yearIndex + 4), 10) :
-                     yearLength === 2 ? parseInt(dateString.substring(yearIndex, yearIndex + 2), 10) + 2000 : null;
+        let year = yearLength === 4 ? parseInt(dateString.substring(yearIndex, yearIndex + 4), 10) :
+        parseInt(dateString.substring(yearIndex, yearIndex + 2), 10) + 2000;
+
+        // Check if the year is more than 150 years old
+        if (currentYear - year > 150) {
+            return false;
+        }
+
         const month = parseInt(dateString.substring(monthIndex, monthIndex + 2), 10) - 1; // month is 0-indexed
         const day = parseInt(dateString.substring(dayIndex, dayIndex + 2), 10);
     
