@@ -1,3 +1,6 @@
 test
 node_modules
 src
+.babelrc
+.eslintrc.js
+.github
