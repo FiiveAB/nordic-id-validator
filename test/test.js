@@ -30,6 +30,11 @@ test('Validator.isValidSE rejects incorrect numbers', t => {
   t.false(validator.isValidSE('1983032-783'));
   t.false(validator.isValidSE(85023233432));
   t.false(validator.isValidSE('1983432-793'));
+  t.false(validator.isValidSE('1983432-793 gdgd'));
+  t.false(validator.isValidSE('8503233432 sjipg'));
+  t.false(validator.isValidSE('20060528-5733 gjoig'));
+  t.false(validator.isValidSE('20060528-5733-'));
+  t.false(validator.isValidSE('200-60528-5733'));
 
 });
 
@@ -63,6 +68,10 @@ const invalid = [
   '24101539581',
   '13127448172',
   '32091402864',
+  '19040518227 iojd',
+  '19040518227-fdfd',
+  '20060528-5733-',
+  '16015014435 dfg',
 ]
 
 const valid = [
@@ -206,11 +215,14 @@ const validFi = [
   '010594Y9032',
 ]
 
-const notValidFi = ['01011995+433X',
+const notValidFi = [
+  '01011995+433X',
   '01015+433X',
   '010195+4433X',
   '010195+33X',
   '290200-101P',
+  '010594Y9032 s',
+  '020503F9037 dg',
 ]
 
 
@@ -240,6 +252,7 @@ const notValidDk = [
   '010594902',
   '01059490211',
   '13059490211',
+  '0312949031 df'
 ]
 
 

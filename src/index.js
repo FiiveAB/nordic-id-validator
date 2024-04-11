@@ -39,7 +39,7 @@ class Validator {
      */
     isValidSE(input) {
         if (typeof input === 'string') {
-            const normalized = input.replace(/\D/g, '')
+            const normalized = input.replace('-', '').trim()
             return svPersonalNumber(normalized)
 
         } else if (typeof input === 'number') {
@@ -57,7 +57,7 @@ class Validator {
      */
     isValidNO(input) {
         if (typeof input === 'string') {
-            const normalized = input.replace(/\D/g, '')
+            const normalized = input.trim()
             return noPersonalNumber(normalized)
 
         } else if (typeof input === 'number') {
@@ -75,7 +75,8 @@ class Validator {
      */
     isValidDK(input) {
         if (typeof input === 'string') {
-            const normalized = input.replace(/\D/g, '')
+            const normalized = input.replace('-', '').trim()
+            
             return dkPersonalNumber(normalized)
 
         } else if (typeof input === 'number') {
