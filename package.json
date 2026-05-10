@@ -3,12 +3,19 @@
   "version": "1.1.0",
   "description": "A light-weight library for verifying Nordic personal identification numbers (SNNs) with accuracy and ease.",
   "main": "dist/index.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "ava",
-    "start": "node .src/index.js",
+    "test": "ava && npm run test:types",
+    "test:types": "tsc",
+    "start": "node ./src/index.js",
     "lint": "eslint src",
-    "publish": "npm run lint && npm run test && npm run build && npm publish"
+    "prepublishOnly": "npm run lint && npm test && npm run build",
+    "release": "npm run lint && npm run test && npm run build && npm publish"
   },
   "repository": {
     "type": "git",
@@ -21,7 +28,6 @@
     "personal",
     "identification",
     "numbers",
-    "personal",
     "number",
     "sweden",
     "norway",
@@ -35,13 +41,21 @@
   },
   "homepage": "https://github.com/FiiveAB/nordic-id-validator#readme",
   "devDependencies": {
-    "@babel/cli": "^7.23.0",
-    "@babel/core": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
-    "ava": "^5.3.1",
-    "eslint": "^8.54.0"
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "@eslint/js": "^9.39.4",
+    "ava": "^6.4.1",
+    "eslint": "^9.39.4",
+    "globals": "^17.6.0",
+    "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ]
   }
 }

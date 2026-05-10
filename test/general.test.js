@@ -140,3 +140,8 @@ invalidDateTest('YYDDMM', [
     {},
     []
 ]);
+
+
+test('isValidDate: rejects whitespace-only string', t => {
+    t.false(isValidDate('      ', 'YYMMDD'));
+});

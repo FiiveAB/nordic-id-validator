@@ -1,7 +1,7 @@
 const { testFinnishDate } = require("./general");
 
 const checksumTable = '0123456789ABCDEFHJKLMNPRSTUVWXY'.split('')
-const SSN_REGEX = /^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])([5-9]\d\+|\d\d[-|U-Y]|[012]\d[A-F])\d{3}[\dA-Z]$/
+const SSN_REGEX = /^(0[1-9]|[12]\d|3[01])(0[1-9]|1[0-2])([5-9]\d\+|\d\d[-U-Y]|[012]\d[A-F])\d{3}[\dA-Z]$/
 
 function fiPersonalNumber(number) {
     if (!SSN_REGEX.test(number)) {
