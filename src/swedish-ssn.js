@@ -1,4 +1,4 @@
-const { testSwedishDate, teshLuhn } = require("./general");
+const { testSwedishDate, testLuhn } = require("./general");
 
 /**
  * Helper function to validate a Swedish personal number.
@@ -11,7 +11,7 @@ function svPersonalNumber(number) {
         // Validate the date of birth
         testSwedishDate(number) &&
         // Validate the check digit (Luhn algorithm)
-        teshLuhn(number)
+        testLuhn(number)
     )
 }
 

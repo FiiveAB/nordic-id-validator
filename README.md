@@ -1,99 +1,114 @@
-# Nordic ID Validator
+# nordic-id-validator
 
-**`Nordic-ID-Validator`** is a comprehensive toolkit for verifying Nordic personal identification numbers with accuracy and ease.
+[![npm version](https://img.shields.io/npm/v/nordic-id-validator.svg)](https://www.npmjs.com/package/nordic-id-validator)
+[![license](https://img.shields.io/npm/l/nordic-id-validator.svg)](./LICENSE)
+[![node](https://img.shields.io/node/v/nordic-id-validator.svg)](https://nodejs.org)
 
-## Features
+Lightweight, zero-dependency validator for Nordic personal identification numbers (SSN / personnummer / fødselsnummer / CPR / HETU).
 
-- Supports all major Nordic countries: Sweden, Norway, Denmark, and Finland.
-- Provides both format and date validation.
-- Lightweight with no external dependencies.
+Supports **Sweden**, **Norway**, **Denmark**, and **Finland** with format, date, and checksum validation.
 
 ## Installation
 
-Using npm:
-
 ```bash
 npm install nordic-id-validator
+```
 
+## Quick start
+
+```js
+const Validator = require('nordic-id-validator');
+const validator = new Validator();
+
+validator.isValid('860101-3496', 'SE'); // true
+validator.isValid('21103426631', 'NO'); // true
 ```
 
 ## Usage
 
-First, import the Validator class:
+### Generic API
 
-```jsx
-const Validator = require('nordic-id-validator');
+Use `isValid(input, countryCode)` when the country is dynamic:
 
+```js
+validator.isValid('860101-3496', 'SE'); // true
+validator.isValid('0105949021',  'DK'); // true
+validator.isValid('010594Y9021', 'FI'); // true
 ```
 
-Next, create an instance of the Validator class:
+### Country-specific API
 
-```jsx
-const validator = new Validator();
+Use the country-specific methods when the country is known up front:
 
+```js
+validator.isValidSE('860101-3496');  // Sweden
+validator.isValidNO('21103426631');  // Norway
+validator.isValidDK('0105949021');   // Denmark
+validator.isValidFI('010594Y9021');  // Finland
 ```
 
-To validate a personal number, use the **`isValid`** method by passing the personal number and the respective country code:
+## API
 
-```jsx
-const isValid = validator.isValid('your_personal_number', 'SE'); // For Swedish numbers
+| Method                          | Returns   | Description                                   |
+| ------------------------------- | --------- | --------------------------------------------- |
+| `isValid(input, countryCode)`   | `boolean` | Validates against the given country code.     |
+| `isValidSE(input)`              | `boolean` | Validates a Swedish personnummer.             |
+| `isValidNO(input)`              | `boolean` | Validates a Norwegian fødselsnummer.          |
+| `isValidDK(input)`              | `boolean` | Validates a Danish CPR-nummer.                |
+| `isValidFI(input)`              | `boolean` | Validates a Finnish HETU.                     |
 
-```
+**Supported country codes:** `SE`, `NO`, `DK`, `FI`.
 
-Replace **`'your_personal_number'`** with the personal number you want to validate and **`'SE'`** with the respective country code. Valid country codes are:
+**Input types:** `string` (recommended) or `number`. Number input is supported for convenience but will silently drop leading zeros — prefer strings.
 
-- **`SE`** for Sweden
-- **`NO`** for Norway
-- **`DK`** for Denmark
-- **`FI`** for Finland
+### Accepted formats
 
-Example:
+| Country | Length     | Example          | Separator                              |
+| ------- | ---------- | ---------------- | -------------------------------------- |
+| SE      | 10 digits  | `860101-3496`    | Optional `-` between date and serial.  |
+| SE      | 12 digits  | `19860101-3496`  | Optional `-` between date and serial.  |
+| NO      | 11 digits  | `21103426631`    | None.                                  |
+| DK      | 10 digits  | `030594-9031`    | Optional `-` between date and serial.  |
+| FI      | 11 chars   | `010594Y9021`    | Century marker is part of the format.  |
 
-```jsx
-const isValidSwedish = validator.isValid('123456-7890', 'SE');
-console.log(isValidSwedish); // true or false based on the validity
+### Validation rules per country
 
-const isValidNorwegian = validator.isValid('12345678901', 'NO');
-console.log(isValidNorwegian); // true or false based on the validity
+- **Sweden** — length, date of birth, and Luhn check digit.
+- **Norway** — length, date of birth, and both mod-11 check digits.
+- **Denmark** — length and date of birth. The mod-11 checksum was phased out in 2007 and is **not** validated.
+- **Finland** — HETU format, date of birth, and check character (modulo 31).
 
-```
+## Error handling
 
+`isValid` throws on unknown country codes:
 
-You can also validate a personal number without specifying the country code. In this case, the country is specified by the the function. For example:
-
-```jsx
-const isValidSwedish = validator.isValidSE('123456-7890');
-console.log(isValidSwedish); // true or false based on the validity
-```
-
-The following country-specific methods are available:
-
-- **`isValidSE`** for Swedish SSN
-- **`isValidNO`** for Norwegian SSN
-- **`isValidDK`** for Danish SSN
-- **`isValidFI`** for Finnish SSN
-
-
-## Error Handling
-
-The **`isValid`** method will throw an error if an invalid country code is provided or if the input is neither a string nor a number:
-
-```jsx
+```js
 try {
-    const isValid = validator.isValid('your_personal_number', 'INVALID_COUNTRY_CODE');
+    validator.isValid('860101-3496', 'XX');
 } catch (error) {
     console.error(error.message);
+    // -> "Invalid country code. Valid country codes are: SE, NO, DK, FI"
 }
-
 ```
 
-## Contribution
+All methods throw a `TypeError` if the input is neither a string nor a number:
 
-We welcome contributions! If you find a bug or have suggestions, please open an issue.
+```js
+validator.isValidSE({}); // throws TypeError
+```
+
+Otherwise, validation returns `false` for malformed input — no exceptions for ordinary invalid numbers.
+
+## Contributing
+
+Issues and pull requests are welcome. Please include test cases for any new validation rules or bug fixes.
+
+```bash
+npm install
+npm test
+npm run lint
+```
 
 ## License
 
-MIT
-
-
-A project by [Fiive](https://www.fiive.se).
+[MIT](./LICENSE) — A project by [Fiive](https://www.fiive.se).
